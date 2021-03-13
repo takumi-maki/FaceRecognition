@@ -58,7 +58,7 @@ def handle_message(event):
         )
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     line_bot_api.reply_message(
         event.reply_token,
