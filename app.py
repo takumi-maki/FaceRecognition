@@ -79,7 +79,9 @@ def handle_image(event):
         message_id = event.message.id
         message_content = line_bot_api.get_message_content(message_id)
         image = BytesIO(message_content.content)
-        detected_faces = face_client.face.detect_with_stream(image)
+        detected_faces = face_client.face.detect_with_stream(
+            image, return_face_attributes=['age', 'gender', 'smile', 'glasses', 'emotion'])
+
         print(detected_faces)
 
         if detected_faces != []:
