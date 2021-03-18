@@ -83,7 +83,7 @@ def handle_image(event):
         print(detected_faces)
 
         if detected_faces != []:
-            text = detected_faces[0].face_id
+            text = detected_faces[0].face_attributes.emotion
         else:
             text = 'no faces detected'
     except:
