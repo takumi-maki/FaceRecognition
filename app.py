@@ -34,6 +34,9 @@ face_client = FaceClient(
     CognitiveServicesCredentials(YOUR_FACE_API_KEY)
 )
 
+PERSON_GROUP_ID = os.getenv('PERSON_GROUP_ID')
+PERSON_ID_AUDREY = os.getenv('PERSON_ID_AUDREY')
+
 
 @app.route("/hello")
 def hello():
@@ -85,10 +88,22 @@ def handle_image(event):
         print(detected_faces)
 
         if detected_faces != []:
-            text = detected_faces[0].face_attributes.emotion
-
+            valified = face_client.face.verify_face_to_person(
+                face_id=detected_faces[0].face_id,
+                person_group_id=PERSON_GROUP_ID,
+                person_id=PERSON_ID_AUDREY
+            )
+            if valified:
+                if valified.is_identical:
+                    text = 'この写真はオードリーヘップバーンです(score:{:.3f})'.format(
+                        valified.confidence)
+                else:
+                    text = 'この写真はオードリーヘップバーンではありません(score:{:.3f})'.format(
+                        valified.confidence)
+            else:
+                text = '識別できませんでした。'
         else:
-            text = 'no faces detected'
+            text = '写真から顔が検出できませんでした。他の画像で試してください。'
     except:
         text = 'error'
 
