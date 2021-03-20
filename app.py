@@ -68,7 +68,7 @@ def handle_message(event):
     if text in ['空気階段']:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text + "ね。面白いよね。y"))
+            TextSendMessage(text=event.message.text + "ね。面白いよね。"))
     else:
         line_bot_api.reply_message(
             event.reply_token,
