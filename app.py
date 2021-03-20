@@ -35,7 +35,7 @@ face_client = FaceClient(
 )
 
 PERSON_GROUP_ID = os.getenv('PERSON_GROUP_ID')
-PERSON_ID_AUDREY = os.getenv('PERSON_ID_AUDREY')
+PERSON_ID_MASS = os.getenv('PERSON_ID_MASS')
 
 
 @app.route("/hello")
@@ -91,14 +91,14 @@ def handle_image(event):
             valified = face_client.face.verify_face_to_person(
                 face_id=detected_faces[0].face_id,
                 person_group_id=PERSON_GROUP_ID,
-                person_id=PERSON_ID_AUDREY
+                person_id=PERSON_ID_MASS
             )
             if valified:
                 if valified.is_identical:
-                    text = 'この写真はオードリーヘップバーンです(score:{:.3f})'.format(
+                    text = 'この写真は空気階段のかたまりです(score:{:.3f})'.format(
                         valified.confidence)
                 else:
-                    text = 'この写真はオードリーヘップバーンではありません(score:{:.3f})'.format(
+                    text = 'この写真は空気階段のかたまりではありません(score:{:.3f})'.format(
                         valified.confidence)
             else:
                 text = '識別できませんでした。'
