@@ -65,10 +65,10 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    if text in ['愛してる', '好き']:
+    if text in ['空気階段', 'もぐら', 'かたまり']:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text + "と言ってくれてありがとう！"))
+            TextSendMessage("面白いよね"))
     else:
         line_bot_api.reply_message(
             event.reply_token,
